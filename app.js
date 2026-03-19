@@ -218,40 +218,33 @@ function initFeedback() {
     btn.disabled = true;
     btn.textContent = 'Sending…';
 
-    // Netlify Forms — works automatically when deployed on Netlify.
-    // Falls back to mailto if not on Netlify (e.g. local file testing).
-    const isNetlify = window.location.hostname.includes('netlify') ||
-                      window.location.hostname.includes('openclaw') ||
-                      (window.location.protocol === 'https:');
-
     try {
-      if (isNetlify) {
-        // Netlify Forms submission
-        const formData = new URLSearchParams();
-        formData.append('form-name', 'companion-feedback');
-        formData.append('name', name);
-        formData.append('email', email);
-        formData.append('message', message);
-        formData.append('type', tab);
-        formData.append('page', page);
+      // Netlify Forms — post as URL-encoded to the current page URL
+      // This is the correct pattern for Netlify Forms with JS submissions
+      const formData = new URLSearchParams();
+      formData.append('form-name', 'companion-feedback');
+      formData.append('name', name);
+      formData.append('email', email);
+      formData.append('message', message);
+      formData.append('type', tab);
+      formData.append('page', page);
+      formData.append('bot-field', ''); // honeypot
 
-        const res = await fetch('/', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-          body: formData.toString(),
-        });
-        if (!res.ok) throw new Error('Submit failed');
-      } else {
-        throw new Error('Not on Netlify — using mailto fallback');
-      }
+      const res = await fetch(window.location.pathname, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: formData.toString(),
+      });
+
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       form.style.display = 'none';
       if (success) success.style.display = 'block';
-    } catch {
-      // Fallback: open mailto
+    } catch (err) {
+      // Fallback: open mailto so no submission is ever lost
       const subject = encodeURIComponent(`[Companion Guide] ${tab === 'question' ? 'Question' : 'Suggestion'} — ${page}`);
       const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`);
-      window.location.href = `mailto:jinnopenclaw@gmail.com?subject=${subject}&body=${body}`;
+      window.open(`mailto:jinnopenclaw@gmail.com?subject=${subject}&body=${body}`);
     } finally {
       btn.disabled = false;
       btn.textContent = tab === 'question' ? '→ Send Question' : '→ Send Suggestion';
