@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thanks! — OpenClaw Companion Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .thankyou-wrap {
+      display: flex; flex-direction: column; align-items: center;
+      justify-content: center; min-height: 60vh;
+      text-align: center; padding: 3rem 2rem;
+    }
+    .thankyou-icon { font-size: 3.5rem; margin-bottom: 1.5rem; }
+    .thankyou-wrap h1 { font-size: 2rem; margin-bottom: .75rem; }
+    .thankyou-wrap p { color: var(--text-secondary); max-width: 480px; margin: 0 auto 2rem; }
+    .back-btn {
+      display: inline-flex; align-items: center; gap: .5rem;
+      padding: .75rem 1.5rem; background: var(--accent); color: #000;
+      border-radius: var(--radius); font-weight: 600; font-size: 14px;
+      text-decoration: none; transition: opacity .15s ease;
+    }
+    .back-btn:hover { opacity: .85; text-decoration: none; }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons">
+        <button class="theme-btn" data-mode="light">☀️ Light</button>
+        <button class="theme-btn" data-mode="system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div style="margin-top:52px;">
+    <div class="thankyou-wrap">
+      <div class="thankyou-icon">✅</div>
+      <h1 class="page-title">Got it, thanks!</h1>
+      <p>Your message has been received. Questions from paid users get a guaranteed response within 24 hours. All other questions are answered as soon as we can.</p>
+      <a href="javascript:history.back()" class="back-btn">← Back to the guide</a>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
