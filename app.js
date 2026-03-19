@@ -214,3 +214,18 @@ document.addEventListener('DOMContentLoaded', () => {
   initCopyButtons();
   initFeedback();
 });
+
+// Clear form fields when browser restores page from back/forward cache
+// (prevents stale data showing after a successful submission)
+window.addEventListener('pageshow', (e) => {
+  if (e.persisted) {
+    const form = document.querySelector('.feedback-form');
+    if (form) form.reset();
+    const notifyEmail = document.getElementById('notify-email');
+    if (notifyEmail) { notifyEmail.value = ''; notifyEmail.disabled = false; }
+    const notifyBtn = document.querySelector('.notify-btn');
+    if (notifyBtn) { notifyBtn.disabled = false; notifyBtn.textContent = 'Notify Me'; }
+    const notifyMsg = document.getElementById('notify-msg');
+    if (notifyMsg) notifyMsg.style.display = 'none';
+  }
+});
