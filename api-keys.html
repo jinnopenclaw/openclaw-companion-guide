@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Keys & Models — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: API Keys & Models">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">API Keys &amp; Models</h1>
+      <p class="page-subtitle">Three providers. One .env file. A model stack designed to keep costs low and quality high.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> Set <code>ANTHROPIC_API_KEY</code>, <code>OPENAI_API_KEY</code>, and <code>GOOGLE_API_KEY</code>. Store them in <code>~/.openclaw/.env</code> — never paste them directly into JSON. The model stack uses Claude Sonnet as the primary brain, GPT-5.4 for deep reasoning, and Haiku/Gemini Flash for cheap background tasks.
+      </div>
+
+      <h2>The .env File</h2>
+
+      <p>OpenClaw loads environment variables from <code>~/.openclaw/.env</code> at startup. This is where your keys live. Never put raw key values in <code>openclaw.json</code> — always reference them as variables.</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>ANTHROPIC_API_KEY=sk-ant-...
+OPENAI_API_KEY=sk-...
+GOOGLE_API_KEY=AIza...</code>
+      </div>
+
+      <p>In <code>openclaw.json</code>, reference them like this:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"apiKey": "${ANTHROPIC_API_KEY}"</code>
+      </div>
+
+      <p>This keeps secrets out of version control and config files. If you ever share your <code>openclaw.json</code>, no keys leak.</p>
+
+      <h2>Anthropic (Claude) — Primary Brain</h2>
+
+      <p>Get your key at <strong>console.anthropic.com</strong>. Go to API Keys, create a new key, copy it immediately — it won't show again.</p>
+
+      <p>The model ID to use:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>anthropic/claude-sonnet-4-6</code>
+      </div>
+
+      <p>Claude Sonnet 4.6 is the default for everything: conversations, orchestration, coding decisions, writing, tool use. It's the best balance of speed, capability, and cost in the stack.</p>
+
+      <h2>OpenAI (GPT-5.4) — Deep Reasoning</h2>
+
+      <p>Get your key at <strong>platform.openai.com</strong>. Go to API Keys, create a project key with appropriate permissions.</p>
+
+      <p>The model ID:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openai/gpt-5.4</code>
+      </div>
+
+      <p>Best for: complex debugging, novel algorithm design, anything that requires sustained multi-step reasoning that Claude struggles with. GPT-5.4 is noticeably more expensive — treat it as a specialist you call in when needed, not the default.</p>
+
+      <div class="alert alert-warning">
+        <strong>Use GPT-5.4 sparingly.</strong> It costs significantly more than Sonnet per token. Reserve it for complex reasoning tasks Claude can't handle cleanly. Avoid it for cron jobs, summaries, or anything routine.
+      </div>
+
+      <h2>Google — Background Tasks</h2>
+
+      <p>Get your key at <strong>aistudio.google.com</strong>. Create an API key for Gemini access.</p>
+
+      <p>Use Gemini Flash for cheap background work — nightly extraction, triage, summaries. It's very inexpensive and fast for structured tasks.</p>
+
+      <div class="alert alert-warning">
+        <strong>Critical warning: Gemini Pro Preview bug.</strong> Gemini Pro Preview had a critical bug where it produced raw JSON tool calls in the chat output instead of executing them. The AI appeared completely broken — it would output <code>{"tool": "exec", "command": "..."}</code> as text rather than running anything. This went undiagnosed for days. The fix was switching back to Claude.<br><br>
+        Rule: if your AI outputs raw JSON when you ask it to run a command, switch models immediately.
+      </div>
+
+      <h2>Model Aliases in openclaw.json</h2>
+
+      <p>Set your defaults in the <code>agents.defaults.model</code> section. This tells OpenClaw what to use for primary tasks and what to fall back to if a provider is unavailable:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"agents": {
+  "defaults": {
+    "model": {
+      "primary": "anthropic/claude-sonnet-4-6",
+      "fallbacks": ["anthropic/claude-haiku-4-5-20251001", "openai/gpt-5.4"]
+    }
+  }
+}</code>
+      </div>
+
+      <p>The fallback order matters. Haiku comes before GPT-5.4 because it's much cheaper — if Sonnet is unavailable, you want the cheap fallback first, not the expensive one.</p>
+
+      <h2>The Three-Tier Model Stack</h2>
+
+      <table>
+        <tr>
+          <th>Tier</th>
+          <th>Model</th>
+          <th>Use Case</th>
+          <th>Cost</th>
+        </tr>
+        <tr>
+          <td><strong>Main brain</strong></td>
+          <td>Claude Sonnet 4.6</td>
+          <td>Orchestration, coding, decisions</td>
+          <td>Medium</td>
+        </tr>
+        <tr>
+          <td><strong>Deep reasoning</strong></td>
+          <td>GPT-5.4</td>
+          <td>Complex debugging, algorithm design</td>
+          <td>Medium-High</td>
+        </tr>
+        <tr>
+          <td><strong>Background</strong></td>
+          <td>Haiku / Gemini Flash</td>
+          <td>Cron jobs, email triage, extraction</td>
+          <td>Very low</td>
+        </tr>
+      </table>
+
+      <div class="alert alert-success">
+        <strong>Background tier is the most impactful cost optimization.</strong> Nightly memory extraction, morning briefing, and email triage all run on Haiku — roughly 100x cheaper than Sonnet. The output quality is more than adequate for structured tasks. Don't run cron jobs on Sonnet.
+      </div>
+
+      <h2>Cost Reality</h2>
+
+      <p>Real numbers from building this system: roughly <strong>$40 in Anthropic credits</strong> for a weekend of heavy testing and iteration — Claude covered everything. Day-to-day running costs are much lower once the system is stable.</p>
+
+      <p>The biggest cost risk is <strong>coding agents</strong>. A poorly scoped PRD (Product Requirements Document — a short written spec that tells the agent exactly what to build and what success looks like) fed to a coding agent will cause expensive loops — the agent iterates, hits ambiguity, asks for clarification, iterates again. Before you spin up an agent for a build task, write a clear spec. It saves both time and money.</p>
+
+      <ul>
+        <li>Set a monthly spending limit on each provider dashboard</li>
+        <li>Anthropic Console: set a hard limit at a level you're comfortable with</li>
+        <li>OpenAI Platform: billing alerts at a low threshold since GPT-5.4 costs more</li>
+        <li>Review usage weekly until you know your baseline</li>
+      </ul>
+
+      <div class="page-nav">
+        <a href="telegram.html" class="nav-button prev">← Connect Telegram</a>
+        <a href="identity.html" class="nav-button next">Identity & Soul →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="api-keys">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Heartbeats & Hooks — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Heartbeats & Hooks">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Heartbeats & Hooks</h1>
+      <p class="page-subtitle">Ambient awareness vs precise scheduling. Event-driven automation. From basic to advanced.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> A <strong>heartbeat</strong> is your AI checking in every 30 minutes — quietly monitoring things and only speaking up when something needs attention. A <strong>hook</strong> is a script that fires automatically when something happens inside OpenClaw (a session starts, a command runs, a message arrives). Together they make your AI proactive without being noisy.
+      </div>
+
+      <h2>Part 1: Heartbeats</h2>
+
+      <h3>What is a heartbeat?</h3>
+      <p>Every 30 minutes (by default), OpenClaw sends your AI a pulse — a periodic check-in prompt. Your AI reads a file called <code>HEARTBEAT.md</code> and acts on whatever's in it. If nothing needs attention, it stays silent. If something does, it messages you.</p>
+
+      <p>Think of it like a doctor checking your pulse: most of the time nothing's wrong, they say nothing. Occasionally they say "actually, something's up."</p>
+
+      <h3>Heartbeat vs Cron — the real difference</h3>
+
+      <table>
+        <tr>
+          <th>Heartbeat</th>
+          <th>Cron Job</th>
+        </tr>
+        <tr>
+          <td>Runs in your main session</td>
+          <td>Runs in an isolated session</td>
+        </tr>
+        <tr>
+          <td>Approximate timing (~30 min)</td>
+          <td>Exact timing ("9:00 AM sharp")</td>
+        </tr>
+        <tr>
+          <td>Has full conversation context</td>
+          <td>Starts fresh each time</td>
+        </tr>
+        <tr>
+          <td>Batches multiple checks together</td>
+          <td>One task per job</td>
+        </tr>
+        <tr>
+          <td>Best for: ambient monitoring</td>
+          <td>Best for: precise scheduled tasks</td>
+        </tr>
+        <tr>
+          <td>Silent unless something to report</td>
+          <td>Always delivers output to channel</td>
+        </tr>
+      </table>
+
+      <h3>The decision flowchart</h3>
+      <ul>
+        <li><strong>Need it at exactly 9:00 AM?</strong> → Cron</li>
+        <li><strong>Batching 3+ periodic checks?</strong> → Heartbeat</li>
+        <li><strong>Need main session context?</strong> → Heartbeat</li>
+        <li><strong>Want a different/cheaper model?</strong> → Cron</li>
+        <li><strong>One-shot reminder in 20 minutes?</strong> → Cron</li>
+        <li><strong>Monitoring for unusual events?</strong> → Heartbeat</li>
+      </ul>
+
+      <h3>Setting up HEARTBEAT.md</h3>
+      <p>Create this file in your workspace. Keep it short — it's loaded every poll cycle.</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>cat > ~/.openclaw/workspace/HEARTBEAT.md << 'EOF'
+# HEARTBEAT.md
+
+## Active Checks
+- Check APPROVAL_QUEUE.md — flag anything pending for more than 2 hours
+- Check memory/$(date +%Y-%m-%d).md — any open items from today?
+- If an urgent email has arrived since last check, flag it
+
+## Quiet Hours
+- No proactive messages 23:00–08:00 unless genuinely urgent
+- Do not message about routine items during quiet hours
+
+## Cooldown
+- Don't repeat the same alert within 2 hours
+EOF</code>
+      </div>
+
+      <h3>Configuring heartbeat timing</h3>
+      <p>The heartbeat interval is set in your <code>openclaw.json</code>:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"heartbeat": {
+  "enabled": true,
+  "interval": "30m",
+  "channel": "telegram"
+}</code>
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Best practice:</strong> Use heartbeat for 2–4 combined checks per cycle. Create separate cron jobs only when exact timing matters.
+      </div>
+
+      <h3>Tracking heartbeat state</h3>
+      <p>To prevent repeat alerts, your AI can track what it last checked:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># ~/.openclaw/workspace/memory/heartbeat-state.json
+{
+  "lastChecks": {
+    "email": 1773785000,
+    "calendar": 1773785000,
+    "approvals": 1773785000
+  },
+  "lastAlerts": {
+    "pending-approval-x": 1773785000
+  }
+}</code>
+      </div>
+
+      <p>Your AI reads this file, compares timestamps, and only checks things that are due. It writes back after each check. No repeat alerts, no noise.</p>
+
+      ---
+
+      <h2>Part 2: Hooks</h2>
+
+      <h3>What is a hook?</h3>
+      <p>A hook is a small script that fires automatically when something happens inside OpenClaw. Not on a schedule — on an <em>event</em>. Session starts: hook fires. Command runs: hook fires. Message arrives: hook fires.</p>
+
+      <p>Hooks run inside the Gateway, not in the agent session. They're fast, lightweight, and run in the background.</p>
+
+      <h3>The two types</h3>
+
+      <table>
+        <tr>
+          <th>Internal Hooks</th>
+          <th>External Webhooks</th>
+        </tr>
+        <tr>
+          <td>Run inside OpenClaw on agent events</td>
+          <td>External HTTP endpoints that trigger OpenClaw</td>
+        </tr>
+        <tr>
+          <td>Examples: boot-md, session-memory, command-logger</td>
+          <td>Examples: GitHub webhook → Jinn reviews PR</td>
+        </tr>
+        <tr>
+          <td>Config: <code>hooks.internal</code></td>
+          <td>Config: <code>hooks.enabled + token</code></td>
+        </tr>
+        <tr>
+          <td>Bundled with OpenClaw</td>
+          <td>You set them up in external services</td>
+        </tr>
+      </table>
+
+      <h3>The bundled hooks you should enable</h3>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"hooks": {
+  "internal": {
+    "enabled": true,
+    "entries": {
+      "boot-md": { "enabled": true },
+      "bootstrap-extra-files": { "enabled": true },
+      "session-memory": { "enabled": true },
+      "command-logger": { "enabled": true }
+    }
+  }
+}</code>
+      </div>
+
+      <p>What each one does:</p>
+      <ul>
+        <li><strong>boot-md</strong> — loads your workspace files (SOUL.md, MEMORY.md, etc.) at the start of every session</li>
+        <li><strong>bootstrap-extra-files</strong> — loads additional files you specify at boot</li>
+        <li><strong>session-memory</strong> — writes session summaries to memory at the end of each session</li>
+        <li><strong>command-logger</strong> — logs every command the AI runs, with timestamps and outcomes</li>
+      </ul>
+
+      <div class="alert alert-warning">
+        <strong>boot-md is the most important hook.</strong> Without it, your AI loads without SOUL.md, MEMORY.md, or AGENTS.md — it has no identity, no context, and no rules. Enable it on day one.
+      </div>
+
+      <h3>External webhooks</h3>
+      <p>You can expose a webhook endpoint from your Gateway so external services can trigger your AI:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"hooks": {
+  "enabled": true,
+  "token": "your-secret-token",
+  "path": "/hooks",
+  "allowedAgentIds": ["main"]
+}</code>
+      </div>
+
+      <p>This exposes three endpoints on your Gateway:</p>
+
+      <table>
+        <tr>
+          <th>Endpoint</th>
+          <th>What it does</th>
+        </tr>
+        <tr>
+          <td><code>POST /hooks/wake</code></td>
+          <td>Wakes the main agent with a message</td>
+        </tr>
+        <tr>
+          <td><code>POST /hooks/agent</code></td>
+          <td>Routes a message to a specific agent</td>
+        </tr>
+        <tr>
+          <td><code>POST /hooks/&lt;name&gt;</code></td>
+          <td>Fires a named mapped hook</td>
+        </tr>
+      </table>
+
+      <h3>Example: GitHub PR triggers Jinn to review it</h3>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># 1. Get your Gateway's public URL (via Cloudflare tunnel or similar)
+openclaw gateway tunnel
+
+# 2. In GitHub: Settings → Webhooks → Add webhook
+# URL: https://your-tunnel.trycloudflare.com/hooks/wake
+# Secret: your-secret-token
+# Events: Pull requests
+
+# 3. The webhook body tells Jinn what to do:
+# POST /hooks/wake
+# { "message": "New PR opened: {{PR title}}. Please review it." }</code>
+      </div>
+
+      <h3>Creating custom hooks (advanced)</h3>
+      <p>You can write your own hooks in TypeScript. Each hook lives in a directory with two files:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code">~/.openclaw/hooks/
+└── my-custom-hook/
+    ├── HOOK.md        # Metadata: name, events, description
+    └── handler.ts     # TypeScript: what to do when event fires</code>
+      </div>
+
+      <p>The HOOK.md format:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># my-custom-hook
+
+## Events
+- session:start
+- command:after
+
+## Description
+Logs session starts and post-command states to a local file.
+
+## Enabled
+true</code>
+      </div>
+
+      <p>The handler receives an event context object with:</p>
+      <ul>
+        <li><code>event.type</code> — what happened (session:start, command:after, etc.)</li>
+        <li><code>event.agentId</code> — which agent triggered it</li>
+        <li><code>event.sessionId</code> — the session ID</li>
+        <li><code>event.payload</code> — event-specific data</li>
+      </ul>
+
+      <h3>Hook event types</h3>
+
+      <table>
+        <tr>
+          <th>Category</th>
+          <th>Events</th>
+        </tr>
+        <tr>
+          <td>Session</td>
+          <td>session:start, session:end, session:reset</td>
+        </tr>
+        <tr>
+          <td>Command</td>
+          <td>command:before, command:after</td>
+        </tr>
+        <tr>
+          <td>Agent</td>
+          <td>agent:turn:start, agent:turn:end</td>
+        </tr>
+        <tr>
+          <td>Message</td>
+          <td>message:inbound, message:outbound</td>
+        </tr>
+        <tr>
+          <td>Gateway</td>
+          <td>gateway:start, gateway:stop</td>
+        </tr>
+      </table>
+
+      <h3>Managing hooks via CLI</h3>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># List all discovered hooks
+openclaw hooks list
+
+# Check hook details
+openclaw hooks info --name boot-md
+
+# Enable/disable a hook
+openclaw hooks enable --name my-custom-hook
+openclaw hooks disable --name my-custom-hook
+
+# Check why a hook isn't running
+openclaw hooks check --name my-custom-hook</code>
+      </div>
+
+      <h2>Best Practices</h2>
+
+      <div class="alert alert-success">
+        <strong>Keep hook handlers fast.</strong> Hooks run synchronously in the Gateway. A slow hook delays everything else. If you need to do heavy work, spawn it async or use a cron job instead.
+      </div>
+
+      <div class="alert alert-success">
+        <strong>Filter events early.</strong> Check <code>event.type</code> immediately in your handler and return early if it's not the event you care about. Don't do expensive operations then discard.
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>Never put secrets in HOOK.md.</strong> HOOK.md is discoverable by anyone with filesystem access. Put secrets in <code>~/.openclaw/.env</code> and read them via <code>process.env</code>.
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>Webhooks require a public URL.</strong> Your Gateway runs on localhost. To receive external webhooks (from GitHub, Stripe, etc.), you need a tunnel. Use the Cloudflare quick tunnel: <code>cloudflared tunnel --url http://localhost:18789</code>
+      </div>
+
+      <div class="page-nav">
+        <a href="automation.html" class="nav-button prev">← Automation & Cron</a>
+        <a href="agents.html" class="nav-button next">Coding Agents →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="heartbeats">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

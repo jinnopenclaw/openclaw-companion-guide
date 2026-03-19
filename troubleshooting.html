@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Troubleshooting — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Troubleshooting">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Troubleshooting</h1>
+      <p class="page-subtitle">Every error we hit, with its exact fix. This page is the real value of the guide.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> Validate JSON before every restart. Run <code>openclaw doctor</code> after every config change. The config schema is strict — keys that look valid often aren't. When the AI outputs raw JSON instead of running commands, switch models immediately.
+      </div>
+
+      <h2>The golden rule</h2>
+
+      <p>Before anything else, when something breaks:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>cat ~/.openclaw/openclaw.json | python3 -m json.tool
+openclaw doctor</code>
+      </div>
+
+      <p>If JSON is invalid: fix before restarting. If doctor finds issues: run <code>openclaw doctor --fix</code>.</p>
+
+      <hr>
+
+      <h2>Error 1: Double messages in Telegram</h2>
+
+      <p><strong>Error:</strong> Every AI response appears twice in Telegram chat.</p>
+
+      <p><strong>Root cause:</strong> <code>streaming: "partial"</code> sends both the intermediate and final response to Telegram.</p>
+
+      <p><strong>Fix:</strong> Change streaming setting in the telegram channel config:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"streaming": "off"</code>
+      </div>
+
+      <p>This is one of the first things you hit. The default streaming setting causes every reply to appear twice — once as an intermediate and once as the final. Fix on Day 1.</p>
+
+      <hr>
+
+      <h2>Error 2: Raw JSON in chat instead of execution</h2>
+
+      <p><strong>Error:</strong> When you ask the AI to run a shell command, it outputs raw JSON like <code>{"tool": "exec", "command": "echo hello", ...}</code> in the chat instead of running the command.</p>
+
+      <p><strong>Root cause:</strong> Gemini model bug. Gemini doesn't integrate cleanly with OpenClaw's exec pipeline.</p>
+
+      <p><strong>Fix:</strong> Switch to Claude Sonnet immediately:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"model": {
+  "primary": "anthropic/claude-sonnet-4-6"
+}</code>
+      </div>
+
+      <p>Then restart the gateway. This fixes it instantly. Don't spend days debugging permissions when the real problem is the model.</p>
+
+      <hr>
+
+      <h2>Error 3: Telegram exec approvals not enabled</h2>
+
+      <p><strong>Error:</strong> <code>❌ Telegram exec approvals are not enabled for this bot account</code></p>
+
+      <p><strong>Root cause:</strong> Telegram exec approvals are a SEPARATE config from the main exec settings. They are not enabled by default.</p>
+
+      <p><strong>Fix:</strong></p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw approvals security set --agent main --level full</code>
+      </div>
+
+      <p>This took two days to find. Run it on Day 1 after setting up Telegram.</p>
+
+      <hr>
+
+      <h2>Error 4: exec denied — allowlist miss with redirections</h2>
+
+      <p><strong>Error:</strong> <code>exec denied: allowlist miss</code> when trying to use <code>&gt;</code> or <code>&gt;&gt;</code> in shell commands.</p>
+
+      <p><strong>Root cause:</strong> Redirections (<code>&gt;</code>, <code>&gt;&gt;</code>) are permanently unsupported in OpenClaw's allowlist mode, regardless of security settings. This is by design, not a bug.</p>
+
+      <p><strong>Fix:</strong> Use <code>tee</code> instead:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code># BROKEN — never works
+echo "text" >> file.txt
+
+# WORKS — use this instead
+echo "text" | tee -a file.txt
+
+# Overwrite (not append)
+echo "text" | tee file.txt</code>
+      </div>
+
+      <p>Three days of debugging across three AI models to find this one.</p>
+
+      <hr>
+
+      <h2>Error 5: Unrecognized keys in tools.exec</h2>
+
+      <p><strong>Error:</strong> <code>tools.exec: Unrecognized keys: "allowOperators", "shell", "cwd"</code> (or any of these individually)</p>
+
+      <p><strong>Root cause:</strong> These keys don't exist in OpenClaw's schema. The documentation may suggest them, but they were never valid.</p>
+
+      <p><strong>Fix:</strong> Remove them from your config. The valid keys for <code>tools.exec</code> are:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"exec": {
+  "host": "gateway",
+  "security": "full",
+  "ask": "off",
+  "pathPrepend": ["/opt/homebrew/bin", "/usr/local/bin"]
+}</code>
+      </div>
+
+      <p>Do not add <code>allowOperators</code>, <code>shell</code>, <code>cwd</code>, or <code>autoApprove</code> to any tools section.</p>
+
+      <hr>
+
+      <h2>Error 6: execApprovals invalid in telegram block</h2>
+
+      <p><strong>Error:</strong> <code>channels.telegram.execApprovals: Invalid input</code> or schema validation error mentioning <code>execApprovals</code></p>
+
+      <p><strong>Root cause:</strong> <code>execApprovals</code> is not a valid key inside the telegram channel block. It belongs in a separate location (or is set via CLI).</p>
+
+      <p><strong>Fix:</strong> Remove <code>execApprovals</code> from the telegram channel block entirely. Configure exec approvals via CLI:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw approvals security set --agent main --level full</code>
+      </div>
+
+      <hr>
+
+      <h2>Error 7: hooks.external not supported</h2>
+
+      <p><strong>Error:</strong> <code>hooks.external: Unrecognized key</code> on gateway startup</p>
+
+      <p><strong>Root cause:</strong> External hooks are not supported in the current version of OpenClaw. The documentation may reference them, but they don't work.</p>
+
+      <p><strong>Fix:</strong> Remove the <code>hooks.external</code> block from your config entirely. Use only <code>hooks.internal</code>:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"hooks": {
+  "internal": {
+    "enabled": true,
+    "entries": {
+      "boot-md": { "enabled": true },
+      "bootstrap-extra-files": { "enabled": true },
+      "command-logger": { "enabled": true },
+      "session-memory": { "enabled": true }
+    }
+  }
+}</code>
+      </div>
+
+      <hr>
+
+      <h2>Error 8: MEMORY.md duplication causing edit failures</h2>
+
+      <p><strong>Error:</strong> Edit tool throws an error like "the text appears more than once in the file" when trying to update MEMORY.md.</p>
+
+      <p><strong>Root cause:</strong> Multiple edits over time have created duplicate sections in MEMORY.md.</p>
+
+      <p><strong>Fix:</strong> Use <code>write</code> to overwrite the file completely rather than patching it:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code># From Telegram, tell the AI:
+"Read MEMORY.md. Deduplicate it — merge any duplicate sections, keeping the most recent/complete version of each. Then write the clean version back to MEMORY.md as a complete overwrite, not an edit."</code>
+      </div>
+
+      <p>Do not use the edit tool on heavily-edited MEMORY.md files. Use write to overwrite completely.</p>
+
+      <hr>
+
+      <h2>Error 9: Config invalid after any change</h2>
+
+      <p><strong>Error:</strong> Gateway fails to start or throws schema errors after editing openclaw.json.</p>
+
+      <p><strong>Root cause:</strong> JSON syntax error or invalid key introduced during editing.</p>
+
+      <p><strong>Fix:</strong> Always run this sequence after any config change:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>cat ~/.openclaw/openclaw.json | python3 -m json.tool && openclaw gateway restart</code>
+      </div>
+
+      <p>If python3 reports a JSON error: find and fix it before restarting. Common mistakes:</p>
+      <ul>
+        <li>Trailing comma after last item in an object or array</li>
+        <li>Missing comma between items</li>
+        <li>Mismatched brackets or braces</li>
+        <li>String value not quoted</li>
+      </ul>
+
+      <p>Run <code>openclaw doctor --fix</code> after restart to catch schema-level issues.</p>
+
+      <hr>
+
+      <h2>Config validation checklist</h2>
+
+      <p>Before restarting the gateway, check:</p>
+      <ol>
+        <li>JSON is valid: <code>cat ~/.openclaw/openclaw.json | python3 -m json.tool</code></li>
+        <li>No unrecognised keys (see error 5 above for the common ones)</li>
+        <li>No <code>execApprovals</code> in the telegram block</li>
+        <li>No <code>hooks.external</code> block</li>
+        <li><code>streaming: "off"</code> in the telegram block</li>
+        <li><code>"bash": true</code> in the commands section</li>
+        <li>Model ID uses the full path: <code>anthropic/claude-sonnet-4-6</code></li>
+      </ol>
+
+      <div class="page-nav">
+        <a href="social.html" class="nav-button prev">← Social & Commerce</a>
+        <a href="reference.html" class="nav-button next">Reference & Templates →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="troubleshooting">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

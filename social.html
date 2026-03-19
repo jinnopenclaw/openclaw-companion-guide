@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Social & Commerce — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Social & Commerce">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Social & Commerce</h1>
+      <p class="page-subtitle">Connect your AI to social media, set up payments, and build income streams.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> Connect X/Twitter (OAuth 1.0a), Reddit, LinkedIn and Facebook via their respective skills. Approval is always required before any post goes live. For selling: Gumroad for simplest setup, Stripe for custom checkout. Build in that order.
+      </div>
+
+      <h2>Social Media — The Golden Rule</h2>
+
+      <div class="alert alert-warning">
+        <strong>Your AI never posts autonomously.</strong> Draft → queue for approval → you approve → post. This applies even if you've told it to post daily. Every post requires your eyes before it goes live.
+      </div>
+
+      <h2>X (Twitter) — xurl Skill</h2>
+
+      <p>The <code>xurl</code> skill handles X/Twitter. It uses OAuth 1.0a (works on free tier).</p>
+
+      <h3>What you need</h3>
+      <ul>
+        <li>X Developer account at <a href="https://developer.twitter.com" target="_blank">developer.twitter.com</a></li>
+        <li>An app with Read+Write+DMs permissions</li>
+        <li>Four tokens: API Key, API Secret, Access Token, Access Token Secret</li>
+      </ul>
+
+      <h3>Create the app</h3>
+      <ol>
+        <li>Go to <a href="https://developer.twitter.com/en/portal/dashboard" target="_blank">developer.twitter.com</a></li>
+        <li>Create a new project and app</li>
+        <li>Set App Permissions to "Read and Write"</li>
+        <li>Generate tokens under "Keys and Tokens"</li>
+        <li>Copy all four token values</li>
+      </ol>
+
+      <h3>Authenticate</h3>
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code">xurl auth oauth1
+# Paste each token when prompted</code>
+      </div>
+
+      <h3>Test it</h3>
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code">xurl get /2/users/me</code>
+      </div>
+
+      <p>You should see your account info. Now your AI can draft posts, read mentions, and search — but always sends posts through approval before going live.</p>
+
+      <h2>Reddit — reddit Skill</h2>
+
+      <h3>What you need</h3>
+      <ol>
+        <li>Go to <a href="https://www.reddit.com/prefs/apps" target="_blank">reddit.com/prefs/apps</a></li>
+        <li>Click "create another app"</li>
+        <li>Choose "script" type</li>
+        <li>Get your Client ID (under the app name) and Client Secret</li>
+      </ol>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># Add to ~/.openclaw/.env
+REDDIT_CLIENT_ID=your_client_id
+REDDIT_CLIENT_SECRET=your_client_secret
+REDDIT_USERNAME=your_reddit_username
+REDDIT_PASSWORD=your_reddit_password</code>
+      </div>
+
+      <h2>LinkedIn — linkedin Skill</h2>
+
+      <p>LinkedIn authentication requires the Chrome Extension relay (for security reasons — LinkedIn doesn't offer simple OAuth for personal posting).</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># Install the linkedin skill via clawhub
+clawhub install linkedin
+
+# Follow the setup guide
+linkedin setup</code>
+      </div>
+
+      <h2>Facebook & Instagram — facebook Skill</h2>
+
+      <p>Both platforms use the Meta Developer ecosystem.</p>
+
+      <ol>
+        <li>Go to <a href="https://developers.facebook.com" target="_blank">developers.facebook.com</a></li>
+        <li>Create an app (Business type)</li>
+        <li>Add the Pages API product</li>
+        <li>Get your App ID, App Secret, and Page Access Token</li>
+      </ol>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code"># Add to ~/.openclaw/.env
+FACEBOOK_APP_ID=your_app_id
+FACEBOOK_APP_SECRET=your_app_secret
+FACEBOOK_PAGE_TOKEN=your_page_access_token</code>
+      </div>
+
+      <h2>Commerce: Sell Digital Products</h2>
+
+      <h3>The simplest path: Gumroad</h3>
+
+      <p>For a digital product (PDF guide, templates), Gumroad is the fastest way to start collecting money.</p>
+
+      <ol>
+        <li>Go to <a href="https://gumroad.com" target="_blank">gumroad.com</a> and create an account</li>
+        <li>Create a new product</li>
+        <li>Upload your PDF/files</li>
+        <li>Set your price (or "pay what you want" with a minimum)</li>
+        <li>Publish</li>
+      </ol>
+
+      <p>Gumroad takes 10% + payment processing. For a $15-29 product it's the lowest-friction option.</p>
+
+      <h3>Stripe for custom checkout</h3>
+
+      <p>If you want a proper storefront integrated into your website:</p>
+
+      <ol>
+        <li>Go to <a href="https://stripe.com" target="_blank">stripe.com</a> and create an account</li>
+        <li>Get your API keys (dashboard → Developers → API keys)</li>
+        <li>Create a product and price in Stripe dashboard</li>
+        <li>Use Stripe Payment Links for a zero-code checkout page</li>
+      </ol>
+
+      <h3>Newsletter: Substack</h3>
+
+      <p>For building an audience that converts to product sales:</p>
+
+      <ol>
+        <li><a href="https://substack.com" target="_blank">substack.com</a> → Create publication</li>
+        <li>Set up paid tier (minimum $5/month or $30/year)</li>
+        <li>Your AI can draft newsletters — you approve and send</li>
+      </ol>
+
+      <h2>The Recommended Stack</h2>
+
+      <table>
+        <tr>
+          <th>Purpose</th>
+          <th>Tool</th>
+          <th>Why</th>
+        </tr>
+        <tr>
+          <td>Digital product sales</td>
+          <td>Gumroad</td>
+          <td>Zero setup, instant payments</td>
+        </tr>
+        <tr>
+          <td>Custom checkout</td>
+          <td>Stripe</td>
+          <td>More control, lower fees at scale</td>
+        </tr>
+        <tr>
+          <td>Newsletter</td>
+          <td>Substack</td>
+          <td>Built-in audience, paid tier</td>
+        </tr>
+        <tr>
+          <td>Website</td>
+          <td>Vercel/Netlify</td>
+          <td>Free hosting for static sites</td>
+        </tr>
+        <tr>
+          <td>Domain</td>
+          <td>Cloudflare</td>
+          <td>Cheapest registrar, free DNS</td>
+        </tr>
+        <tr>
+          <td>Social (primary)</td>
+          <td>X/Twitter</td>
+          <td>AI/tech audience concentrated here</td>
+        </tr>
+      </table>
+
+      <h2>The Posting Workflow</h2>
+
+      <p>With social media connected, the workflow is:</p>
+
+      <ol>
+        <li>Your AI drafts content based on what you're building</li>
+        <li>It queues the draft to APPROVAL_QUEUE.md</li>
+        <li>It notifies you on Telegram with the draft</li>
+        <li>You reply APPROVE or suggest edits</li>
+        <li>It posts via the appropriate skill</li>
+        <li>It logs the post to memory for future reference</li>
+      </ol>
+
+      <p>This means you always have a human in the loop, but the AI does all the work of drafting, formatting, and scheduling.</p>
+
+      <div class="page-nav">
+        <a href="agents.html" class="nav-button prev">← Coding Agents</a>
+        <a href="troubleshooting.html" class="nav-button next">Troubleshooting →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="social">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

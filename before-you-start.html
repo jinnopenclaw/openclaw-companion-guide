@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Before You Start — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Before You Start">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Before You Start</h1>
+      <p class="page-subtitle">Hardware, OS, and prerequisites. Don't skip this.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> You need a Mac (Intel or Apple Silicon) running macOS 12+, Node 24+, and about 5GB free disk space. No special hardware required — even a 2020 MacBook Air works. Budget half to a full day to setup.
+      </div>
+
+      <h2>Hardware Requirements</h2>
+      <p>OpenClaw is lightweight, but here's what works best:</p>
+
+      <h3>Minimum (Works Fine)</h3>
+      <ul>
+        <li><strong>Mac Mini</strong> (M1 or later) — 8GB RAM, 256GB SSD</li>
+        <li><strong>MacBook Air</strong> (2018 or later) — 8GB RAM, 256GB SSD</li>
+        <li><strong>MacBook Pro</strong> (2016 or later) — 8GB RAM, 256GB SSD</li>
+        <li><strong>Mac Studio</strong> — anything goes</li>
+      </ul>
+
+      <h3>What Actually Helps</h3>
+      <ul>
+        <li><strong>Memory (RAM):</strong> 16GB is comfortable. 8GB works but you'll feel it during Claude Code compilations. 32GB+ is luxury.</li>
+        <li><strong>Storage:</strong> 512GB SSD minimum. You'll accumulate conversation logs, memory files, and cached models.</li>
+        <li><strong>CPU:</strong> Apple Silicon (M1+) beats Intel for LLM inference if you use ollama. Not required.</li>
+      </ul>
+
+      <h3>Mac or Bust</h3>
+      <p>OpenClaw officially supports macOS. Linux and Windows versions exist but are less tested. This guide assumes macOS.</p>
+
+      <h2>Software Prerequisites</h2>
+
+      <h3>Required</h3>
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code># Install Homebrew (if you don't have it)
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+
+# Install Node.js
+brew install node@24
+
+# Verify
+node --version  # Should be v24.x or higher
+npm --version   # Should be 10.x or higher</code>
+      </div>
+
+      <h3>Highly Recommended</h3>
+      <ul>
+        <li><strong>Git:</strong> <code>brew install git</code> — needed for version control</li>
+        <li><strong>jq:</strong> <code>brew install jq</code> — parse JSON from the command line</li>
+        <li><strong>pdftotext:</strong> <code>brew install poppler</code> — read PDFs programmatically</li>
+      </ul>
+
+      <h2>API Keys (Get These First)</h2>
+
+      <p>You'll need API keys from three AI providers. Get them now before you install OpenClaw.</p>
+
+      <h3>Anthropic (Required)</h3>
+      <ol>
+        <li>Go to <a href="https://console.anthropic.com" target="_blank">console.anthropic.com</a></li>
+        <li>Sign up or log in</li>
+        <li>Go to "API Keys" in the left sidebar</li>
+        <li>Click "Create Key"</li>
+        <li>Copy the key (it starts with <code>sk-ant-</code>)</li>
+        <li>Store it safely — you'll paste it into <code>~/.openclaw/.env</code> later</li>
+      </ol>
+      <p><strong>Cost:</strong> Pay as you go. $2-5/month for light use. Budget $50 if you're experimenting heavily.</p>
+
+      <h3>OpenAI (Recommended)</h3>
+      <ol>
+        <li>Go to <a href="https://platform.openai.com/api/keys" target="_blank">platform.openai.com</a></li>
+        <li>Sign up or log in</li>
+        <li>Create a new API key</li>
+        <li>Copy and store it</li>
+      </ol>
+      <p><strong>Cost:</strong> GPT-5.4 is expensive (~$0.10/1K output tokens). Use it for complex reasoning only, not daily chat.</p>
+
+      <h3>Google Gemini (Optional but Useful)</h3>
+      <ol>
+        <li>Go to <a href="https://aistudio.google.com/app/apikey" target="_blank">aistudio.google.com/app/apikey</a></li>
+        <li>Click "Create API Key"</li>
+        <li>Copy and store it</li>
+      </ol>
+      <p><strong>Cost:</strong> Free tier exists (50 requests/day). Paid tier is cheap for light use.</p>
+
+      <h2>Disk Space & Cleanup</h2>
+
+      <p>After 3 months of daily use, expect:</p>
+      <ul>
+        <li>OpenClaw installation: ~500MB</li>
+        <li>Node modules: ~1GB</li>
+        <li>Memory files and logs: ~2GB</li>
+        <li>Model cache (if you use ollama): ~10GB+ (optional)</li>
+      </ul>
+
+      <div class="alert alert-success">
+        <strong>Clean up monthly:</strong> Run <code>openclaw cleanup</code> to remove old session logs and trim memory. Keeps things fast.
+      </div>
+
+      <h2>Network & Connectivity</h2>
+
+      <p><strong>Internet:</strong> Required for API calls to Anthropic, OpenAI, Google. ~50MB/month typical usage.</p>
+      <p><strong>Firewall:</strong> OpenClaw runs on <code>localhost:18789</code> by default. No inbound ports exposed. Safe to run anywhere.</p>
+      <p><strong>VPN:</strong> Works fine. No special config needed.</p>
+
+      <h2>Terminal Knowledge</h2>
+
+      <p>You'll need to be comfortable with:</p>
+      <ul>
+        <li>Opening Terminal (Cmd+Space, type "Terminal")</li>
+        <li>Running commands: <code>command arg1 arg2</code></li>
+        <li>Navigating directories: <code>cd /path/to/folder</code></li>
+        <li>Checking if a command exists: <code>which commandname</code></li>
+      </ul>
+
+      <div class="alert alert-warning">
+        <strong>Don't fear the command line.</strong> Everything you'll run is provided verbatim. Copy-paste, hit Enter, watch it work. If something fails, we'll show you the error and the fix.
+      </div>
+
+      <h2>What's Next</h2>
+
+      <p>You've got your hardware, your Node.js, and your API keys. Time to install OpenClaw.</p>
+
+      <div class="page-nav">
+        <a href="index.html" class="nav-button prev">← Home</a>
+        <a href="installation.html" class="nav-button next">Installation →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="before-you-start">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

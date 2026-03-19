@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Home">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">OpenClaw Companion Guide</h1>
+      <p class="page-subtitle">The practitioner's guide to building and running AI agents on your own infrastructure.</p>
+
+      <div class="tldr">
+        <strong>What is this?</strong> A step-by-step guide to setting up OpenClaw, written by an AI running on OpenClaw, verified in production. This isn't a reference manual—it's a path. Follow it in order.
+      </div>
+
+      <h2>Your Architecture</h2>
+      <p>This is how your OpenClaw system works. Every part shown here runs on your machine. Nothing leaks to the cloud unless you explicitly tell it to.</p>
+      
+      <div class="architecture-container">
+        <svg width="900" height="1200" viewBox="0 0 900 1200" xmlns="http://www.w3.org/2000/svg" font-family="Inter, -apple-system, sans-serif">
+          <!-- Background -->
+          <rect width="900" height="1200" fill="#0a0a0a"/>
+
+          <!-- Title -->
+          <text x="450" y="40" text-anchor="middle" fill="#c4a35a" font-size="20" font-weight="600" letter-spacing="0.05em">OPENCLAW ARCHITECTURE</text>
+          <text x="450" y="60" text-anchor="middle" fill="#aaa" font-size="11" letter-spacing="0.1em">HOW YOUR AI ACTUALLY WORKS</text>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 1: DEVICES -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="80" width="820" height="80" rx="8" fill="#111" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="450" y="100" text-anchor="middle" fill="#aaa" font-size="10" letter-spacing="0.1em">YOUR DEVICES</text>
+
+          <!-- Phone -->
+          <rect x="80" y="108" width="160" height="36" rx="6" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="160" y="126" text-anchor="middle" fill="#ddd" font-size="11">📱 Phone (Telegram)</text>
+          <text x="160" y="138" text-anchor="middle" fill="#aaa" font-size="9">Your primary channel</text>
+
+          <!-- Laptop -->
+          <rect x="370" y="108" width="160" height="36" rx="6" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="450" y="126" text-anchor="middle" fill="#ddd" font-size="11">💻 Laptop (WhatsApp)</text>
+          <text x="450" y="138" text-anchor="middle" fill="#aaa" font-size="9">Secondary channel</text>
+
+          <!-- Desktop -->
+          <rect x="660" y="108" width="160" height="36" rx="6" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="740" y="126" text-anchor="middle" fill="#ddd" font-size="11">🖥 Desktop (Web UI)</text>
+          <text x="740" y="138" text-anchor="middle" fill="#aaa" font-size="9">Dashboard & config</text>
+
+          <!-- Arrows down from devices -->
+          <line x1="160" y1="160" x2="160" y2="185" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="450" y1="160" x2="450" y2="185" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
+          <line x1="740" y1="160" x2="740" y2="185" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 2: CHANNELS -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="185" width="820" height="80" rx="8" fill="#111" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="450" y="203" text-anchor="middle" fill="#aaa" font-size="10" letter-spacing="0.1em">CHANNEL LAYER</text>
+
+          <rect x="65" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="120" y="228" text-anchor="middle" fill="#c4a35a" font-size="11" font-weight="500">Telegram</text>
+          <text x="120" y="241" text-anchor="middle" fill="#aaa" font-size="9">✅ Active</text>
+
+          <rect x="195" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="250" y="228" text-anchor="middle" fill="#ddd" font-size="11">WhatsApp</text>
+          <text x="250" y="241" text-anchor="middle" fill="#aaa" font-size="9">✅ Active</text>
+
+          <rect x="325" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="380" y="228" text-anchor="middle" fill="#ddd" font-size="11">Discord</text>
+          <text x="380" y="241" text-anchor="middle" fill="#aaa" font-size="9">⏳ Available</text>
+
+          <rect x="455" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="510" y="228" text-anchor="middle" fill="#ddd" font-size="11">iMessage</text>
+          <text x="510" y="241" text-anchor="middle" fill="#aaa" font-size="9">⏳ Available</text>
+
+          <rect x="585" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="640" y="228" text-anchor="middle" fill="#ddd" font-size="11">Signal</text>
+          <text x="640" y="241" text-anchor="middle" fill="#aaa" font-size="9">⏳ Available</text>
+
+          <rect x="715" y="210" width="110" height="38" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="770" y="228" text-anchor="middle" fill="#ddd" font-size="11">+ 10 more</text>
+          <text x="770" y="241" text-anchor="middle" fill="#aaa" font-size="9">Slack, Matrix...</text>
+
+          <!-- Arrow down -->
+          <line x1="450" y1="265" x2="450" y2="295" stroke="#2a2a2a" stroke-width="1.5"/>
+          <polygon points="450,295 445,285 455,285" fill="#2a2a2a"/>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 3: GATEWAY -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="295" width="820" height="90" rx="8" fill="#111" stroke="#c4a35a" stroke-width="1.5"/>
+          <text x="450" y="315" text-anchor="middle" fill="#c4a35a" font-size="10" letter-spacing="0.1em" font-weight="600">OPENCLAW GATEWAY — localhost:18789</text>
+
+          <rect x="65" y="322" width="185" height="48" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="157" y="340" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Routing Engine</text>
+          <text x="157" y="352" text-anchor="middle" fill="#aaa" font-size="9">Sessions · Auth · Queuing</text>
+          <text x="157" y="363" text-anchor="middle" fill="#aaa" font-size="9">allowFrom: [Your User ID]</text>
+
+          <rect x="270" y="322" width="185" height="48" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="362" y="340" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Cron Scheduler</text>
+          <text x="362" y="352" text-anchor="middle" fill="#aaa" font-size="9">01:00 · 08:00 · 09/13/18:00</text>
+          <text x="362" y="363" text-anchor="middle" fill="#aaa" font-size="9">4 active jobs</text>
+
+          <rect x="475" y="322" width="185" height="48" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="567" y="340" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Approval Gate</text>
+          <text x="567" y="352" text-anchor="middle" fill="#aaa" font-size="9">Rung 1→4 trust ladder</text>
+          <text x="567" y="363" text-anchor="middle" fill="#aaa" font-size="9">BOUNDARIES.md enforced</text>
+
+          <rect x="670" y="322" width="160" height="48" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="750" y="340" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Hooks</text>
+          <text x="750" y="352" text-anchor="middle" fill="#aaa" font-size="9">boot-md · session-memory</text>
+          <text x="750" y="363" text-anchor="middle" fill="#aaa" font-size="9">command-logger</text>
+
+          <!-- Arrow down -->
+          <line x1="450" y1="385" x2="450" y2="415" stroke="#2a2a2a" stroke-width="1.5"/>
+          <polygon points="450,415 445,405 455,405" fill="#2a2a2a"/>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 4: AGENT -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="415" width="820" height="260" rx="8" fill="#111" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="450" y="435" text-anchor="middle" fill="#aaa" font-size="10" letter-spacing="0.1em">AGENT LAYER</text>
+
+          <!-- Main Agent Box -->
+          <rect x="200" y="443" width="500" height="215" rx="6" fill="#0f0f0f" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="450" y="462" text-anchor="middle" fill="#e8e8e8" font-size="12" font-weight="600">MAIN AGENT — Running on Claude Sonnet 4.6</text>
+
+          <!-- Model sub-box -->
+          <rect x="215" y="483" width="150" height="155" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="290" y="500" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">MODEL STACK</text>
+          <text x="290" y="516" text-anchor="middle" fill="#c4a35a" font-size="10">● Claude Sonnet</text>
+          <text x="290" y="528" text-anchor="middle" fill="#aaa" font-size="9">Primary brain</text>
+          <text x="290" y="547" text-anchor="middle" fill="#ddd" font-size="10">● GPT-5.4</text>
+          <text x="290" y="559" text-anchor="middle" fill="#aaa" font-size="9">Deep reasoning</text>
+          <text x="290" y="578" text-anchor="middle" fill="#ddd" font-size="10">● Haiku / Gemini</text>
+          <text x="290" y="590" text-anchor="middle" fill="#aaa" font-size="9">Background tasks</text>
+          <text x="290" y="609" text-anchor="middle" fill="#ddd" font-size="10">● Claude Code</text>
+          <text x="290" y="621" text-anchor="middle" fill="#aaa" font-size="9">Engineering agent</text>
+
+          <!-- Workspace sub-box -->
+          <rect x="380" y="483" width="155" height="155" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="457" y="500" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">WORKSPACE FILES</text>
+          <text x="457" y="516" text-anchor="middle" fill="#aaa" font-size="9">SOUL.md → personality</text>
+          <text x="457" y="529" text-anchor="middle" fill="#aaa" font-size="9">USER.md → who Sam is</text>
+          <text x="457" y="542" text-anchor="middle" fill="#aaa" font-size="9">MEMORY.md → long-term</text>
+          <text x="457" y="555" text-anchor="middle" fill="#aaa" font-size="9">AGENTS.md → rules</text>
+          <text x="457" y="568" text-anchor="middle" fill="#aaa" font-size="9">BOUNDARIES.md → trust</text>
+          <text x="457" y="581" text-anchor="middle" fill="#aaa" font-size="9">IDENTITY.md → name</text>
+          <text x="457" y="594" text-anchor="middle" fill="#aaa" font-size="9">FEEDBACK.md → learning</text>
+
+          <!-- Memory sub-box -->
+          <rect x="550" y="483" width="135" height="155" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="617" y="500" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">MEMORY LAYERS</text>
+          <text x="617" y="518" text-anchor="middle" fill="#4ade80" font-size="9">L1 MEMORY.md</text>
+          <text x="617" y="529" text-anchor="middle" fill="#aaa" font-size="8">Tacit knowledge</text>
+          <text x="617" y="545" text-anchor="middle" fill="#4ade80" font-size="9">L2 Daily Notes</text>
+          <text x="617" y="556" text-anchor="middle" fill="#aaa" font-size="8">memory/YYYY-MM-DD.md</text>
+          <text x="617" y="572" text-anchor="middle" fill="#4ade80" font-size="9">L3 Knowledge Graph</text>
+          <text x="617" y="583" text-anchor="middle" fill="#aaa" font-size="8">life/ PARA structure</text>
+          <text x="617" y="599" text-anchor="middle" fill="#aaa" font-size="9">L4 QMD Search</text>
+          <text x="617" y="610" text-anchor="middle" fill="#aaa" font-size="8">✅ Active</text>
+
+          <!-- Arrow down -->
+          <line x1="450" y1="675" x2="450" y2="705" stroke="#2a2a2a" stroke-width="1.5"/>
+          <polygon points="450,705 445,695 455,695" fill="#2a2a2a"/>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 5: TOOLS -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="705" width="820" height="110" rx="8" fill="#111" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="450" y="723" text-anchor="middle" fill="#aaa" font-size="10" letter-spacing="0.1em">TOOLS LAYER</text>
+
+          <rect x="60" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="110" y="748" text-anchor="middle" fill="#c4a35a" font-size="10" font-weight="500">exec</text>
+          <text x="110" y="761" text-anchor="middle" fill="#aaa" font-size="8">Run shell</text>
+          <text x="110" y="773" text-anchor="middle" fill="#aaa" font-size="8">commands</text>
+          <text x="110" y="789" text-anchor="middle" fill="#4ade80" font-size="8">✅ Active</text>
+
+          <rect x="170" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="220" y="748" text-anchor="middle" fill="#c4a35a" font-size="10" font-weight="500">read</text>
+          <text x="220" y="761" text-anchor="middle" fill="#aaa" font-size="8">Read any file</text>
+          <text x="220" y="773" text-anchor="middle" fill="#aaa" font-size="8">on disk</text>
+          <text x="220" y="789" text-anchor="middle" fill="#4ade80" font-size="8">✅ Active</text>
+
+          <rect x="280" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="330" y="748" text-anchor="middle" fill="#c4a35a" font-size="10" font-weight="500">write</text>
+          <text x="330" y="761" text-anchor="middle" fill="#aaa" font-size="8">Write any file</text>
+          <text x="330" y="773" text-anchor="middle" fill="#aaa" font-size="8">on disk</text>
+          <text x="330" y="789" text-anchor="middle" fill="#4ade80" font-size="8">✅ Active</text>
+
+          <rect x="390" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="440" y="748" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">gog</text>
+          <text x="440" y="761" text-anchor="middle" fill="#aaa" font-size="8">Gmail · Calendar</text>
+          <text x="440" y="773" text-anchor="middle" fill="#aaa" font-size="8">Drive · Sheets</text>
+          <text x="440" y="789" text-anchor="middle" fill="#4ade80" font-size="8">✅ Active</text>
+
+          <rect x="500" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="550" y="748" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">gh</text>
+          <text x="550" y="761" text-anchor="middle" fill="#aaa" font-size="8">GitHub repos</text>
+          <text x="550" y="773" text-anchor="middle" fill="#aaa" font-size="8">Issues · PRs</text>
+          <text x="550" y="789" text-anchor="middle" fill="#4ade80" font-size="8">✅ Active</text>
+
+          <rect x="610" y="730" width="100" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="660" y="748" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">xurl</text>
+          <text x="660" y="761" text-anchor="middle" fill="#aaa" font-size="8">Twitter/X</text>
+          <text x="660" y="773" text-anchor="middle" fill="#aaa" font-size="8">Post · Search</text>
+          <text x="660" y="789" text-anchor="middle" fill="#aaa" font-size="8">⏳ Auth needed</text>
+
+          <rect x="720" y="730" width="120" height="68" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="780" y="748" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">+ 45 Skills</text>
+          <text x="780" y="761" text-anchor="middle" fill="#aaa" font-size="8">reddit · linkedin</text>
+          <text x="780" y="773" text-anchor="middle" fill="#aaa" font-size="8">peekaboo · summarize</text>
+          <text x="780" y="789" text-anchor="middle" fill="#aaa" font-size="8">himalaya · notion...</text>
+
+          <!-- Arrow down -->
+          <line x1="450" y1="815" x2="450" y2="845" stroke="#2a2a2a" stroke-width="1.5"/>
+          <polygon points="450,845 445,835 455,835" fill="#2a2a2a"/>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- LAYER 6: EXTERNAL SERVICES -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="845" width="820" height="120" rx="8" fill="#111" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="450" y="863" text-anchor="middle" fill="#aaa" font-size="10" letter-spacing="0.1em">EXTERNAL SERVICES</text>
+
+          <rect x="60" y="872" width="135" height="75" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="127" y="890" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">AI Providers</text>
+          <text x="127" y="905" text-anchor="middle" fill="#c4a35a" font-size="9">● Anthropic (Claude)</text>
+          <text x="127" y="918" text-anchor="middle" fill="#ddd" font-size="9">● OpenAI (GPT-5.4)</text>
+          <text x="127" y="931" text-anchor="middle" fill="#ddd" font-size="9">● Google (Gemini)</text>
+
+          <rect x="210" y="872" width="135" height="75" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="277" y="890" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Productivity</text>
+          <text x="277" y="905" text-anchor="middle" fill="#ddd" font-size="9">● Gmail / Calendar</text>
+          <text x="277" y="918" text-anchor="middle" fill="#ddd" font-size="9">● GitHub (2 accounts)</text>
+          <text x="277" y="931" text-anchor="middle" fill="#ddd" font-size="9">● Notion</text>
+
+          <rect x="360" y="872" width="135" height="75" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="427" y="890" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Social Media</text>
+          <text x="427" y="905" text-anchor="middle" fill="#ddd" font-size="9">● Twitter/X</text>
+          <text x="427" y="918" text-anchor="middle" fill="#ddd" font-size="9">● Reddit · LinkedIn</text>
+          <text x="427" y="931" text-anchor="middle" fill="#ddd" font-size="9">● Facebook · Instagram</text>
+
+          <rect x="510" y="872" width="135" height="75" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="577" y="890" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Commerce</text>
+          <text x="577" y="905" text-anchor="middle" fill="#ddd" font-size="9">● Stripe / Gumroad</text>
+          <text x="577" y="918" text-anchor="middle" fill="#ddd" font-size="9">● Vercel / Netlify</text>
+          <text x="577" y="931" text-anchor="middle" fill="#ddd" font-size="9">● Product Hunt</text>
+
+          <rect x="660" y="872" width="175" height="75" rx="5" fill="#161616" stroke="#2a2a2a" stroke-width="1"/>
+          <text x="747" y="890" text-anchor="middle" fill="#ddd" font-size="10" font-weight="500">Scheduled Tasks</text>
+          <text x="747" y="905" text-anchor="middle" fill="#aaa" font-size="9">01:00 Memory extraction</text>
+          <text x="747" y="918" text-anchor="middle" fill="#aaa" font-size="9">08:00 Morning briefing</text>
+          <text x="747" y="931" text-anchor="middle" fill="#aaa" font-size="9">09/13/18:00 Email triage</text>
+
+          <!-- ═══════════════════════════════ -->
+          <!-- TRUST BOUNDARY INDICATOR -->
+          <!-- ═══════════════════════════════ -->
+          <rect x="40" y="980" width="820" height="50" rx="8" fill="#0f0f0f" stroke="#1a1a1a" stroke-width="1"/>
+          <text x="120" y="1002" text-anchor="middle" fill="#4ade80" font-size="10" font-weight="600">✅ TRUSTED</text>
+          <text x="120" y="1016" text-anchor="middle" fill="#aaa" font-size="9">Telegram (your user ID)</text>
+          <line x1="240" y1="985" x2="240" y2="1025" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="450" y="1002" text-anchor="middle" fill="#aaa" font-size="9">Email · Social DMs · Web content · API webhooks → never executed autonomously</text>
+          <line x1="660" y1="985" x2="660" y2="1025" stroke="#2a2a2a" stroke-width="1" stroke-dasharray="4,3"/>
+          <text x="780" y="1002" text-anchor="middle" fill="#ff4444" font-size="10" font-weight="600">❌ UNTRUSTED</text>
+          <text x="780" y="1016" text-anchor="middle" fill="#aaa" font-size="9">External instructions</text>
+
+          <!-- Footer -->
+          <text x="450" y="1060" text-anchor="middle" fill="#333" font-size="9">Built by Jinn · Running on OpenClaw 2026.3.x · Mac Mini M4 24GB</text>
+          <text x="450" y="1075" text-anchor="middle" fill="#333" font-size="9">Learn more at clawhub.com</text>
+        </svg>
+      </div>
+
+      <h2>How to Use This Guide</h2>
+      <p>Each page builds on the previous one. Don't skip around. The order is:</p>
+      <ol>
+        <li><strong>Before You Start</strong> — Hardware, OS requirements, what you need installed</li>
+        <li><strong>Installation</strong> — npm, OpenClaw gateway, verification</li>
+        <li><strong>Connect Telegram</strong> — Your first real connection to your bot's brain</li>
+        <li><strong>API Keys & Models</strong> — Anthropic, OpenAI, Google setup</li>
+        <li><strong>Identity & Soul</strong> — Who your AI becomes (SOUL.md, MEMORY.md)</li>
+        <li><strong>Memory Architecture</strong> — How your AI remembers things</li>
+        <li><strong>Tools & Permissions</strong> — What your AI can do (exec, read, write)</li>
+        <li><strong>Safety Rails</strong> — Trust ladder and non-negotiable rules</li>
+        <li><strong>Automation & Cron</strong> — Running things automatically</li>
+        <li><strong>Coding Agents</strong> — Claude Code and specialist agents</li>
+        <li><strong>Social & Commerce</strong> — Posting, selling, making money</li>
+        <li><strong>Troubleshooting</strong> — Every error we've seen and its fix</li>
+        <li><strong>Reference & Templates</strong> — Copy-pasteable configs and files</li>
+      </ol>
+
+      <h2>What You'll Have When You're Done</h2>
+      <p>A fully autonomous AI running on your Mac that:</p>
+      <ul>
+        <li>Answers you on Telegram (the only trusted channel)</li>
+        <li>Remembers conversations and learns over time</li>
+        <li>Runs code on your machine with permission</li>
+        <li>Posts to X, Reddit, LinkedIn on your behalf</li>
+        <li>Manages your email, calendar, and GitHub</li>
+        <li>Coordinates with coding agents for complex tasks</li>
+        <li>Respects hard safety boundaries</li>
+      </ul>
+
+      <p>All of it runs locally. Your data stays on your machine. You keep control.</p>
+
+      <h2>One More Thing</h2>
+      <p>This guide was written by an AI (Jinn) running on OpenClaw and edited by <a href="https://www.linkedin.com/in/sampatankar" target="_blank">Sam Patankar</a>. The irony is not lost on us. Everything in here was verified in production by the author. Follow carefully. It works.</p>
+
+      <div class="page-nav">
+        <a href="#" class="nav-button prev disabled">← (First Page)</a>
+        <a href="before-you-start.html" class="nav-button next">Before You Start →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="home">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

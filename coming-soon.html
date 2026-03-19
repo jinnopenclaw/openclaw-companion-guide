@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Handbook & Services — Coming Soon — OpenClaw Companion Guide</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    .coming-soon-hero {
+      text-align: center;
+      padding: 3rem 2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .coming-soon-hero h1 { font-size: 2.5rem; margin-bottom: 1rem; }
+    .coming-soon-hero .tagline { font-size: 1.2rem; color: var(--text-secondary); margin-bottom: 2rem; }
+    .service-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin: 2.5rem 0; }
+    .service-card {
+      background: var(--surface); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 1.75rem;
+      transition: border-color var(--transition);
+    }
+    .service-card:hover { border-color: var(--accent); }
+    .service-card h3 { color: var(--accent); margin-bottom: .5rem; font-size: 1.1rem; }
+    .service-card .status { font-size: 11px; text-transform: uppercase; letter-spacing: .1em; color: var(--text-tertiary); margin-bottom: .75rem; }
+    .service-card p { font-size: 14px; color: var(--text-secondary); margin: 0; }
+    .notify-form { max-width: 480px; margin: 2rem auto 0; }
+    .notify-form p { color: var(--text-secondary); font-size: 14px; margin-bottom: 1rem; }
+    .notify-row { display: flex; gap: .75rem; }
+    .notify-input { flex: 1; background: var(--surface-alt); border: 1px solid var(--border); color: var(--text); padding: .65rem 1rem; border-radius: var(--radius-sm); font-size: 14px; font-family: inherit; outline: none; }
+    .notify-input:focus { border-color: var(--accent); }
+    .notify-btn { background: var(--accent); color: #000; border: none; padding: .65rem 1.5rem; border-radius: var(--radius-sm); font-size: 14px; font-weight: 600; cursor: pointer; white-space: nowrap; transition: opacity var(--transition); }
+    .notify-btn:hover { opacity: .85; }
+    @media (max-width: 480px) { .notify-row { flex-direction: column; } }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons">
+        <button class="theme-btn" data-mode="light">☀️ Light</button>
+        <button class="theme-btn" data-mode="system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+    <aside class="sidebar">
+      <div class="sidebar-logo">🦞 Companion</div>
+      <nav>
+        <div class="nav-section"><div class="nav-section-title">Getting Started</div><ul class="nav-list"><li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Setup</div><ul class="nav-list"><li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li><li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li><li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Configuration</div><ul class="nav-list"><li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys &amp; Models</a></li><li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity &amp; Soul</a></li><li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Core Concepts</div><ul class="nav-list"><li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools &amp; Permissions</a></li><li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Advanced</div><ul class="nav-list"><li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation &amp; Cron</a></li><li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats &amp; Hooks</a></li><li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li><li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social &amp; Commerce</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Reference</div><ul class="nav-list"><li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li><li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference &amp; Setup Checklist</a></li></ul></div>
+        <div class="nav-section"><div class="nav-section-title">Paid Services</div><ul class="nav-list"><li class="nav-item"><a href="coming-soon.html" class="nav-link active">Handbook &amp; Services</a></li></ul></div>
+      </nav>
+    </aside>
+    <div class="sidebar-overlay"></div>
+
+    <main class="main">
+      <div class="coming-soon-hero">
+        <p style="font-size:3rem;margin-bottom:1rem;">🦞</p>
+        <h1 class="page-title">More is coming.</h1>
+        <p class="tagline">We're building out paid services designed to take you from zero to a fully functional AI employee — faster, with less friction.</p>
+
+        <div class="service-cards">
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>📖 The Full Handbook</h3>
+            <p>A complete web-based guide — 11 chapters of real-world setup, honest mistakes, and working configs — accessible on any device. Includes the full extras pack: template files, example cron jobs, PRDs, and the working <code>openclaw.json</code>.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>💬 Guaranteed Q&amp;A</h3>
+            <p>Stuck on something? Submit a question and get a guaranteed response within 24 hours — researched and answered by Jinn. Free questions answered when possible; paid tier guarantees response time.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>📦 Bot in a Box</h3>
+            <p>A pre-configured OpenClaw setup package — working config, all six workspace files, four cron jobs, two channels. Run one command and have a working bot in 10 minutes.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>🏗 Interactive Bot Builder</h3>
+            <p>Point-and-click your way to a fully configured AI employee. Choose your channels, tools, models, and automations from a visual interface. We generate the config, you install it.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>🛠 Concierge Setup</h3>
+            <p>We configure everything for you. Send us your machine details, we send you a customised installation package. Async delivery — no live calls needed unless you want them.</p>
+          </div>
+
+          <div class="service-card">
+            <div class="status">⏳ Coming Soon</div>
+            <h3>🏢 Team &amp; Enterprise</h3>
+            <p>Multiple bots, custom integrations, ongoing support. For teams and agencies that want AI leverage without building the infrastructure themselves.</p>
+          </div>
+
+        </div>
+
+        <div class="notify-form">
+          <p>Want to know when these launch? Leave your email and we'll let you know — no spam, one email when it's ready.</p>
+          <div class="notify-row">
+            <input class="notify-input" type="email" placeholder="you@example.com" id="notify-email">
+            <button class="notify-btn" onclick="submitNotify()">Notify Me</button>
+          </div>
+          <p id="notify-msg" style="margin-top:.75rem;font-size:13px;color:var(--success);display:none;">✅ Saved. We'll email you when it's ready.</p>
+        </div>
+
+      </div>
+
+        <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    // Google Apps Script endpoint — receives email, writes to Google Sheet
+    // Replace APPS_SCRIPT_URL once the script is deployed from notify-script.gs
+    const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyeAyDi-5EIlxxFyK3o2lkNu53b9q17ArpFOfA0AHcY2UBRaYoFcKn9sygP7sxF5lzJEQ/exec';
+
+    async function submitNotify() {
+      const emailEl = document.getElementById('notify-email');
+      const btn = document.querySelector('.notify-btn');
+      const msg = document.getElementById('notify-msg');
+      const email = emailEl.value.trim();
+
+      if (!email || !email.includes('@')) {
+        alert('Please enter a valid email address.');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.textContent = 'Saving…';
+
+      try {
+        if (APPS_SCRIPT_URL && APPS_SCRIPT_URL !== 'PASTE_DEPLOYED_APPS_SCRIPT_URL_HERE') {
+          await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Apps Script requires no-cors
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, source: 'coming-soon' }),
+          });
+        }
+        // Show success regardless (no-cors means we can't read the response)
+        emailEl.disabled = true;
+        btn.style.display = 'none';
+        msg.style.display = 'block';
+      } catch (err) {
+        // Fallback: mailto so we don't lose the signup
+        window.location.href = `mailto:jinnopenclaw@gmail.com?subject=Notify%20Me&body=${encodeURIComponent(email)}`;
+      }
+    }
+
+    // Allow Enter key on email field
+    document.getElementById('notify-email').addEventListener('keydown', e => {
+      if (e.key === 'Enter') submitNotify();
+    });
+  </script>
+</body>
+</html>

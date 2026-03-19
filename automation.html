@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Automation & Cron — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Automation & Cron">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Automation</h1>
+      <p class="page-subtitle">Cron jobs, morning briefings, email triage, and the nightly extraction that makes memory work.</p>
+
+      <p>A cron job in OpenClaw is a scheduled automation that triggers a specific agent task or shell command at defined time intervals based on the <code>automation.cron</code> configuration.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> Three crons make the system feel alive: 1am memory extraction, 8am morning briefing, and 9/13/18:00 email triage. The nightly cron changed the dynamic — knowing the system is working while you sleep changes the relationship from "chat tool" to "colleague."
+      </div>
+
+      <h2>The operating schedule</h2>
+
+      <p><strong>1:00am — Nightly memory extraction</strong><br>
+      Review the day's conversations. Extract durable facts. Update daily notes. Refresh MEMORY.md if new patterns observed.</p>
+
+      <p><strong>8:00am — Morning briefing</strong><br>
+      Surface the day's priorities, calendar events, pending items, and suggested focus. One tight message, no walls of text.</p>
+
+      <p><strong>9:00am, 1:00pm, 6:00pm — Email triage</strong><br>
+      Brief summary: N emails, action needed, FYI, ignored.</p>
+
+      <h2>Adding a cron job</h2>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron add "CRON_EXPRESSION" "PROMPT"</code>
+      </div>
+
+      <p>List crons:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron list</code>
+      </div>
+
+      <p>Delete a cron:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron delete CRON_ID</code>
+      </div>
+
+      <h2>The morning briefing cron</h2>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron add "0 8 * * *" "Good morning. Review my calendar for today and tomorrow. Check MEMORY.md for any open items from recent sessions. Check APPROVAL_QUEUE.md for anything pending. Send Sam a morning briefing: today's calendar, top 3 priorities, any pending approvals. Keep it tight — max 5 bullet points total."</code>
+      </div>
+
+      <h2>The nightly memory extraction cron</h2>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron add "0 1 * * *" "Nightly memory extraction. Review today's conversations. Extract durable facts: decisions made, preferences noted, project status changes, people mentioned, lessons learned. Update memory/$(date +%Y-%m-%d).md using the daily notes template. If you notice new patterns about how Sam works, update MEMORY.md. Skip small talk and transient requests. Be brief."</code>
+      </div>
+
+      <h2>Email triage cron (requires Google Workspace)</h2>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron add "0 9,13,18 * * *" "Email triage. Check inbox. Categorise each email: ACTION NEEDED (requires Sam's attention), FYI (interesting but no action), IGNORED (marketing, newsletters, automated). Send Sam a brief summary: total count, how many in each category, and the subject line + one-sentence summary of anything ACTION NEEDED. Don't send the full emails — just the triage."</code>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>If you have two Telegram channels configured, your first cron may fail silently</strong> without knowing which channel to send to. Always specify the target channel explicitly in your cron prompt, or set a default channel in your config.
+      </div>
+
+      <h2>Cron expression cheat sheet</h2>
+
+      <table>
+        <tr>
+          <th>Expression</th>
+          <th>Meaning</th>
+        </tr>
+        <tr>
+          <td><code>0 1 * * *</code></td>
+          <td>Every day at 1:00am</td>
+        </tr>
+        <tr>
+          <td><code>0 8 * * *</code></td>
+          <td>Every day at 8:00am</td>
+        </tr>
+        <tr>
+          <td><code>0 9,13,18 * * *</code></td>
+          <td>Daily at 9am, 1pm, 6pm</td>
+        </tr>
+        <tr>
+          <td><code>0 8 * * 1-5</code></td>
+          <td>Weekdays at 8am</td>
+        </tr>
+        <tr>
+          <td><code>0 */4 * * *</code></td>
+          <td>Every 4 hours</td>
+        </tr>
+        <tr>
+          <td><code>@daily</code></td>
+          <td>Alias for <code>0 0 * * *</code></td>
+        </tr>
+      </table>
+
+      <h2>Model choice for cron jobs</h2>
+
+      <p>Use Haiku or Gemini Flash for background crons — roughly 100x cheaper than Sonnet. Only use Sonnet when the cron requires complex reasoning (like a weekly strategy review).</p>
+
+      <p>In your cron prompt, you can specify the model:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron add "0 1 * * *" --model anthropic/claude-haiku-4-5-20251001 "..."</code>
+      </div>
+
+      <div class="alert alert-info">
+        <strong>Tip:</strong> The nightly cron changed the dynamic. Knowing that at 1am the system is quietly organising the day's work changes how you think about the relationship. It's not a chat tool anymore. It's something that's working while you sleep.
+      </div>
+
+      <h2>Debugging failing crons</h2>
+
+      <p>Check cron logs:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw cron logs CRON_ID</code>
+      </div>
+
+      <p>Common causes:</p>
+      <ul>
+        <li>Gateway not running when cron fires</li>
+        <li>Tool permissions not enabled (exec/write needed for most crons)</li>
+        <li>API key missing or expired</li>
+        <li>Prompt too vague — cron does nothing because it doesn't know what to do</li>
+      </ul>
+
+      <div class="page-nav">
+        <a href="safety.html" class="nav-button prev">← Safety Rails</a>
+        <a href="heartbeats.html" class="nav-button next">Heartbeats & Hooks →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="automation">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>

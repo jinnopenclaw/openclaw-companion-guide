@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tools & Permissions — OpenClaw Companion Guide</title>
+  <meta name="description" content="OpenClaw Companion Guide: Tools & Permissions">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- TOPBAR -->
+  <header class="topbar">
+    <div class="topbar-left">
+      <button class="menu-toggle" aria-label="Open menu">☰</button>
+      <div class="topbar-logo">🦞 OpenClaw Companion Guide</div>
+    </div>
+    <div class="topbar-right">
+      <div class="theme-buttons" title="Choose colour theme">
+        <button class="theme-btn" data-mode="light" title="Light mode">☀️ Light</button>
+        <button class="theme-btn" data-mode="system" title="Follow system">⚙ Auto</button>
+        <button class="theme-btn" data-mode="dark" title="Dark mode">🌙 Dark</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="sidebar-logo">🦞 Companion</div>
+    <nav>
+      <div class="nav-section">
+        <div class="nav-section-title">Getting Started</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="index.html" class="nav-link" data-page-id="home">Home</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Setup</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="before-you-start.html" class="nav-link" data-page-id="before-you-start">Before You Start</a></li>
+          <li class="nav-item"><a href="installation.html" class="nav-link" data-page-id="installation">Installation</a></li>
+          <li class="nav-item"><a href="telegram.html" class="nav-link" data-page-id="telegram">Connect Telegram</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Configuration</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="api-keys.html" class="nav-link" data-page-id="api-keys">API Keys & Models</a></li>
+          <li class="nav-item"><a href="identity.html" class="nav-link" data-page-id="identity">Identity & Soul</a></li>
+          <li class="nav-item"><a href="memory.html" class="nav-link" data-page-id="memory">Memory Architecture</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Core Concepts</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="tools.html" class="nav-link" data-page-id="tools">Tools & Permissions</a></li>
+          <li class="nav-item"><a href="safety.html" class="nav-link" data-page-id="safety">Safety Rails</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Advanced</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="automation.html" class="nav-link" data-page-id="automation">Automation & Cron</a></li>
+          <li class="nav-item"><a href="heartbeats.html" class="nav-link" data-page-id="heartbeats">Heartbeats & Hooks</a></li>
+          <li class="nav-item"><a href="agents.html" class="nav-link" data-page-id="agents">Coding Agents</a></li>
+          <li class="nav-item"><a href="social.html" class="nav-link" data-page-id="social">Social & Commerce</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Reference</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="troubleshooting.html" class="nav-link" data-page-id="troubleshooting">Troubleshooting</a></li>
+          <li class="nav-item"><a href="reference.html" class="nav-link" data-page-id="reference">Reference & Setup Checklist</a></li>
+        </ul>
+      </div>
+      <div class="nav-section">
+        <div class="nav-section-title">Paid Services</div>
+        <ul class="nav-list">
+          <li class="nav-item"><a href="coming-soon.html" class="nav-link" data-page-id="coming-soon">Handbook & Services</a></li>
+        </ul>
+      </div>
+    </nav>
+  </aside>
+  <div class="sidebar-overlay"></div>
+
+    <!-- MAIN CONTENT -->
+    <main class="main">
+<h1 class="page-title">Tools &amp; Permissions</h1>
+      <p class="page-subtitle">exec, read, write — in that order. And the approval system that keeps you safe.</p>
+
+      <div class="tldr">
+        <strong>TL;DR:</strong> Enable tools in order: read first, exec second, write last. Without Telegram exec approvals enabled, every shell command times out. The exec-approvals.json allowlist never supports redirections (&gt;, &gt;&gt;) — use tee instead.
+      </div>
+
+      <h2>The Minimum Authority Principle</h2>
+
+      <p>Start with read-only. Write access only to its own workspace. Gradually open up as trust builds. The order matters: getting one permission layer right while another is wrong produces confusing, inconsistent behaviour.</p>
+
+      <h2>Tools in order of enablement</h2>
+
+      <table>
+        <tr>
+          <th>Tool</th>
+          <th>Use case</th>
+          <th>When to enable</th>
+        </tr>
+        <tr>
+          <td>Read (filesystem)</td>
+          <td>Memory, file inspection</td>
+          <td>Day 1</td>
+        </tr>
+        <tr>
+          <td>Exec (shell)</td>
+          <td>Everything useful</td>
+          <td>Day 1 (after read)</td>
+        </tr>
+        <tr>
+          <td>Write (filesystem)</td>
+          <td>Creating/editing files</td>
+          <td>Day 2–3</td>
+        </tr>
+        <tr>
+          <td>GitHub (gh)</td>
+          <td>Code management</td>
+          <td>When you have code</td>
+        </tr>
+        <tr>
+          <td>Google Workspace (gog)</td>
+          <td>Email, calendar</td>
+          <td>When you have accounts</td>
+        </tr>
+        <tr>
+          <td>Coding agents</td>
+          <td>Building things</td>
+          <td>When you have a project</td>
+        </tr>
+        <tr>
+          <td>Social media</td>
+          <td>Marketing</td>
+          <td>When you have something to say</td>
+        </tr>
+      </table>
+
+      <h2>Enabling tools in openclaw.json</h2>
+
+      <p>The tools section:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"tools": {
+  "profile": "coding",
+  "allow": ["group:fs", "group:runtime", "read", "write", "exec"],
+  "exec": {
+    "host": "gateway",
+    "security": "full",
+    "ask": "off",
+    "pathPrepend": ["/opt/homebrew/bin", "/usr/local/bin"]
+  },
+  "elevated": {
+    "enabled": true,
+    "allowFrom": { "telegram": ["YOUR_TELEGRAM_ID"] }
+  }
+}</code>
+      </div>
+
+      <p><strong>Note:</strong> <code>tools.profile: "coding"</code> unlocks group:fs and group:runtime natively. <code>tools.exec.security: "full"</code> with <code>ask: "off"</code> means no per-command approval prompts.</p>
+
+      <h2>The exec-approvals.json allowlist</h2>
+
+      <p>A separate file at <code>~/.openclaw/exec-approvals.json</code> that explicitly allowlists every binary:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>{
+  "allowedBinaries": [
+    "/bin/bash",
+    "/usr/bin/python3",
+    "/opt/homebrew/bin/git",
+    "/usr/bin/find",
+    "/usr/bin/grep"
+  ]
+}</code>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>Redirections (&gt;, &gt;&gt;) NEVER work in allowlist mode,</strong> regardless of security settings. This is permanent, not a bug that will be fixed. Use <code>tee</code> instead:<br><br>
+        BROKEN: <code>echo "text" &gt;&gt; file.txt</code><br>
+        WORKS: <code>echo "text" | tee -a file.txt</code><br><br>
+        Three days of debugging across three AI models to find this. Don't repeat that.
+      </div>
+
+      <h2>Enabling Telegram exec approvals</h2>
+
+      <p>This is SEPARATE from the main exec settings. Without it, every shell command times out. Run this on Day 1:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>openclaw approvals security set --agent main --level full</code>
+      </div>
+
+      <div class="alert alert-warning">
+        <strong>The error <code>❌ Telegram exec approvals are not enabled for this bot account</code> is a separate config from main exec settings.</strong> We hit this for two days before finding this command. Run it early and confirm it works by testing <code>echo hello</code> from Telegram.
+      </div>
+
+      <h2>Keys that DON'T exist (schema errors)</h2>
+
+      <p>These config keys look plausible but are all invalid in OpenClaw's schema. Don't use them:</p>
+
+      <ul>
+        <li><code>tools.elevated.autoApprove</code> — doesn't exist</li>
+        <li><code>tools.exec.allowOperators</code> — doesn't exist</li>
+        <li><code>tools.exec.shell</code> — doesn't exist</li>
+        <li><code>tools.exec.cwd</code> — doesn't exist</li>
+        <li><code>channels.telegram.execApprovals</code> — wrong location</li>
+        <li><code>hooks.external</code> — not supported in current version</li>
+      </ul>
+
+      <p>Test for shell execution working:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>echo hello</code>
+      </div>
+
+      <p>If it returns <code>hello</code>: working. If it returns raw JSON or a timeout: permissions aren't set up. If it outputs JSON like <code>{"tool": "exec", ...}</code>: you're on Gemini — switch to Claude.</p>
+
+      <h2>The commands section</h2>
+
+      <p>Required for bash to work:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>"commands": {
+  "native": "auto",
+  "nativeSkills": "auto",
+  "bash": true
+}</code>
+      </div>
+
+      <p>Without <code>"bash": true</code>, bash commands are disabled.</p>
+
+      <h2>Validating config after every change</h2>
+
+      <p>Never restart the gateway without validating first:</p>
+
+      <div class="code-block">
+        <button class="code-copy-btn">Copy</button>
+        <code>cat ~/.openclaw/openclaw.json | python3 -m json.tool &amp;&amp; openclaw gateway restart</code>
+      </div>
+
+      <div class="alert alert-success">
+        If it prints formatted JSON: valid and restarting. If error: fix before restarting.
+      </div>
+
+      <div class="page-nav">
+        <a href="memory.html" class="nav-button prev">← Memory Architecture</a>
+        <a href="safety.html" class="nav-button next">Safety Rails →</a>
+      </div>
+
+
+  <!-- FEEDBACK FORM -->
+  <section class="feedback-section">
+    <h2>Questions & Suggestions</h2>
+    <p>Have a question about this page? Spotted something wrong? Want to suggest an improvement? We read everything and respond to all paid-tier questions.</p>
+
+    <div class="feedback-tabs">
+      <button class="feedback-tab active" data-tab="question">❓ Ask a Question</button>
+      <button class="feedback-tab" data-tab="suggestion">💡 Suggest an Edit</button>
+    </div>
+
+    <div class="feedback-success">
+      ✅ Thanks! We got it. Questions from paid users are answered within 24 hours. Suggestions go straight into the queue.
+    </div>
+
+    <form class="feedback-form" name="companion-feedback" method="POST" data-netlify="true" data-netlify-honeypot="bot-field" novalidate>
+      <input type="hidden" name="form-name" value="companion-feedback">
+      <p style="display:none"><input name="bot-field"></p>
+      <div class="form-row">
+        <div class="form-group">
+          <label for="fb-name">Name</label>
+          <input class="form-input" type="text" id="fb-name" name="name" placeholder="Your name" autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="fb-email">Email <span style="color:var(--danger)">*</span></label>
+          <input class="form-input" type="email" id="fb-email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+      </div>
+
+      <div class="form-group type-field" style="display:none">
+        <label for="fb-type">Suggestion type</label>
+        <select class="form-select" id="fb-type" name="type">
+          <option value="correction">Correction (something is wrong)</option>
+          <option value="addition">Addition (something is missing)</option>
+          <option value="clarity">Clarity (hard to understand)</option>
+          <option value="other">Other</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="fb-message">Message <span style="color:var(--danger)">*</span></label>
+        <textarea class="form-textarea" id="fb-message" name="message" placeholder="What do you want to know or suggest?" required></textarea>
+      </div>
+
+      <input type="hidden" name="page" value="tools">
+
+      <button type="submit" class="feedback-submit">→ Send Question</button>
+
+      <p class="feedback-note paid-note">
+        💳 We'll try and answer all questions, but we're setting up paid guaranteed response plans - coming soon! Until then, get a detailed setup handbook with advanced setup template, cron job and example PRD files here →
+        <a href="coming-soon.html">Get the Handbook</a>
+      </p>
+    </form>
+  </section>
+
+  <!-- FOOTER -->
+  <footer style="margin-top:3rem;padding-top:1.5rem;border-top:1px solid var(--border);font-size:13px;color:var(--text-tertiary);display:flex;flex-wrap:wrap;gap:1rem;align-items:center;justify-content:space-between;">
+    <div style="display:flex;gap:1.25rem;align-items:center;flex-wrap:wrap;">
+      <a href="https://www.linkedin.com/in/jinnopenclaw" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">🦞 Jinn's LinkedIn</a>
+      <a href="https://www.linkedin.com/in/sampatankar" target="_blank" rel="noopener" style="color:var(--text-secondary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-secondary)'">👤 Sam's LinkedIn</a>
+    </div>
+    <div>
+      <a href="privacy.html" style="color:var(--text-tertiary);text-decoration:none;" onmouseover="this.style.color='var(--accent)'" onmouseout="this.style.color='var(--text-tertiary)'">Privacy Policy</a>
+    </div>
+  </footer>
+    </main>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
