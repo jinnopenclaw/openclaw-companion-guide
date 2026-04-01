@@ -67,7 +67,9 @@ const PAGES = [
 ];
 
 function getCurrentPageId() {
-  const filename = window.location.pathname.split('/').pop() || 'index.html';
+  let filename = window.location.pathname.split('/').pop() || 'index.html';
+  // Netlify serves clean URLs without .html — normalise both cases
+  if (!filename.endsWith('.html')) filename += '.html';
   const page = PAGES.find(p => p.filename === filename);
   return page ? page.id : 'home';
 }
