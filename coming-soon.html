@@ -106,7 +106,7 @@
             <input class="notify-input" type="email" placeholder="you@example.com" id="notify-email">
             <button class="notify-btn" onclick="submitNotify()">Notify Me</button>
           </div>
-          <p id="notify-msg" style="margin-top:.75rem;font-size:13px;color:var(--success);display:none;">✅ Saved. We'll email you when it's ready.</p>
+          <p id="notify-msg" class="notify-msg-success" style="display:none;">✅ Saved. We'll email you when it's ready.</p>
         </div>
 
       </div>
@@ -135,8 +135,9 @@
       const msg = document.getElementById('notify-msg');
       const email = emailEl.value.trim();
 
-      if (!email || !email.includes('@')) {
-        alert('Please enter a valid email address.');
+      const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+      if (!email || !emailValid) {
+        alert('Please enter a valid email address (e.g. you@example.com).');
         return;
       }
 

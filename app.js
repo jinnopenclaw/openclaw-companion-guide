@@ -196,9 +196,15 @@ function initFeedback() {
   form.addEventListener('submit', (e) => {
     const email = form.querySelector('[name="email"]')?.value.trim();
     const message = form.querySelector('[name="message"]')?.value.trim();
-    if (!email || !message) {
+    const emailValid = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email || '');
+    if (!email || !emailValid) {
       e.preventDefault();
-      alert('Please enter your email and message.');
+      alert('Please enter a valid email address (e.g. you@example.com).');
+      return;
+    }
+    if (!message) {
+      e.preventDefault();
+      alert('Please enter your message.');
     }
     // Otherwise let it submit natively — Netlify handles it
   });
