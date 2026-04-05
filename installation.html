@@ -110,14 +110,14 @@
       <p class="page-subtitle">Get OpenClaw running on your Mac. This should take 10 minutes.</p>
 
       <div class="tldr">
-        <strong>TL;DR:</strong> <code>npm install -g openclaw@latest</code> → <code>openclaw onboard --install-daemon</code> → <code>openclaw gateway start</code>. Done. You now have a working OpenClaw Gateway.
+        <strong>TL;DR:</strong> <code>curl -fsSL https://openclaw.ai/install.sh | bash</code> → <code>openclaw onboard --install-daemon</code> → <code>openclaw gateway start</code>. Done. You now have a working OpenClaw Gateway.
       </div>
 
       <h2>Step 1: Install OpenClaw</h2>
 
       <div class="code-block">
         <button class="code-copy-btn">Copy</button>
-        <code>npm install -g openclaw@latest</code>
+        <code>curl -fsSL https://openclaw.ai/install.sh | bash</code>
       </div>
 
       <p>This installs OpenClaw globally. It will take 2-3 minutes.</p>
@@ -190,7 +190,7 @@ Agent: main (claude-sonnet-4.6)</code>
         <strong>Command not found: openclaw?</strong> npm might not be in your PATH. Try:
         <div class="code-block">
           <button class="code-copy-btn">Copy</button>
-          <code>/opt/homebrew/bin/npm install -g openclaw@latest</code>
+          <code>curl -fsSL https://openclaw.ai/install.sh | bash</code>
         </div>
       </div>
 
