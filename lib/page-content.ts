@@ -47,7 +47,6 @@ export const PAGE_MAP: Record<string, string> = {
   'reference': 'reference.html',
   'privacy': 'privacy.html',
   'coming-soon': 'coming-soon.html',
-  'thank-you': 'thank-you.html',
 }
 
 export const PAGE_META: Record<string, { title: string; description: string }> = {
