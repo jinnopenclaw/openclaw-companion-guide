@@ -190,9 +190,14 @@ function initFeedback() {
     });
   });
 
-  // Basic client-side validation before native submit
+  // Set form action to return user to the current page after submission
   const form = document.querySelector('.feedback-form');
   if (!form) return;
+  const pageSlug = form.querySelector('[name="page"]')?.value;
+  if (pageSlug) {
+    const returnPath = pageSlug === 'home' ? '/' : '/' + pageSlug;
+    form.setAttribute('action', '/thank-you?from=' + encodeURIComponent(returnPath));
+  }
   form.addEventListener('submit', (e) => {
     const email = form.querySelector('[name="email"]')?.value.trim();
     const message = form.querySelector('[name="message"]')?.value.trim();
