@@ -1,19 +1,28 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useSearchParams } from 'next/navigation'
 import SiteLayout from '@/components/SiteLayout'
+import { Suspense } from 'react'
 
-export default function ThankYouPage() {
+function ThankYouContent() {
+  const searchParams = useSearchParams()
+  const [backUrl, setBackUrl] = useState('/')
+
   useEffect(() => {
-    // Clear any form data the browser may have cached
-    if (typeof window !== 'undefined') {
-      // Reset all forms on the previous page by clearing sessionStorage form state
-      sessionStorage.removeItem('oc-feedback-data')
-      // Navigate back clears the form — but we also dispatch a storage event
-      // so any open tabs reset their forms too
-      window.dispatchEvent(new Event('oc-form-reset'))
+    const from = searchParams.get('from')
+    if (from) {
+      try {
+        const url = new URL(from)
+        // Only use if same origin
+        if (url.origin === window.location.origin) {
+          setBackUrl(from)
+        }
+      } catch {
+        // invalid URL, use default
+      }
     }
-  }, [])
+  }, [searchParams])
 
   return (
     <SiteLayout>
@@ -22,9 +31,17 @@ export default function ThankYouPage() {
           <div className="thankyou-icon">✅</div>
           <h1 className="page-title">Got it, thanks!</h1>
           <p>Your message has been received. Questions from paid users get a guaranteed response within 24 hours. All other questions are answered as soon as we can.</p>
-          <a href="/" className="back-btn">← Back to the guide</a>
+          <a href={backUrl} className="back-btn">← Back to the guide</a>
         </div>
       </main>
     </SiteLayout>
+  )
+}
+
+export default function ThankYouPage() {
+  return (
+    <Suspense fallback={null}>
+      <ThankYouContent />
+    </Suspense>
   )
 }

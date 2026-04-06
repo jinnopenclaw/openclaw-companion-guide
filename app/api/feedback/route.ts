@@ -19,6 +19,8 @@ export async function POST(req: NextRequest) {
     return NextResponse.redirect(new URL('/thank-you', req.url), 303);
   }
 
+  const referer = req.headers.get('referer') ?? '';
+
   const payload = {
     name: params.get('name') ?? '',
     email,
@@ -38,5 +40,9 @@ export async function POST(req: NextRequest) {
     console.error('[feedback] Apps Script POST failed:', err);
   }
 
-  return NextResponse.redirect(new URL('/thank-you', req.url), 303);
+  // Encode the referer so thank-you page can send user back
+  const thankYouUrl = new URL('/thank-you', req.url);
+  if (referer) thankYouUrl.searchParams.set('from', referer);
+
+  return NextResponse.redirect(thankYouUrl, 303);
 }
