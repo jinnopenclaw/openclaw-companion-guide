@@ -138,6 +138,18 @@ export default function AppClient() {
     })
   }, [pathname])
 
+  // Reset forms when navigating back from thank-you (browser cache restore)
+  useEffect(() => {
+    const handlePageShow = (e: PageTransitionEvent) => {
+      if (e.persisted) {
+        const form = document.querySelector<HTMLFormElement>('.feedback-form')
+        if (form) form.reset()
+      }
+    }
+    window.addEventListener('pageshow', handlePageShow)
+    return () => window.removeEventListener('pageshow', handlePageShow)
+  }, [])
+
   return null
 }
 
