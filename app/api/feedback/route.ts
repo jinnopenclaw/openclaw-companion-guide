@@ -1,14 +1,16 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { Resend } from 'resend';
 
+const resend = new Resend(process.env.RESEND_API_KEY);
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const NOTIFY_EMAIL = 'jinnopenclaw@gmail.com';
 
 export async function POST(req: NextRequest) {
   const body = await req.text();
   const params = new URLSearchParams(body);
 
   // Honeypot check
-  const botField = params.get('bot-field') ?? '';
-  if (botField.trim() !== '') {
+  if ((params.get('bot-field') ?? '').trim() !== '') {
     return buildRedirect(req);
   }
 
@@ -17,28 +19,29 @@ export async function POST(req: NextRequest) {
     return buildRedirect(req);
   }
 
-  // Forward to Netlify Forms via the static detection page at /netlify-forms.html
-  // Netlify intercepts POSTs to any URL on the site that include form-name
-  const formData = new URLSearchParams();
-  formData.set('form-name', 'companion-feedback');
-  formData.set('bot-field', '');
-  formData.set('name', params.get('name') ?? '');
-  formData.set('email', email);
-  formData.set('message', params.get('message') ?? '');
-  formData.set('type', params.get('type') ?? '');
-  formData.set('page', params.get('page') ?? '');
+  const name = params.get('name') ?? '';
+  const message = params.get('message') ?? '';
+  const type = params.get('type') ?? 'question';
+  const page = params.get('page') ?? '';
 
   try {
-    const netlifyRes = await fetch('https://clawcompanion.ai/netlify-forms.html', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
-      },
-      body: formData.toString(),
+    await resend.emails.send({
+      from: 'OpenClaw Companion <onboarding@resend.dev>',
+      to: NOTIFY_EMAIL,
+      replyTo: email,
+      subject: `📬 New ${type} from ${page || 'the guide'}`,
+      text: [
+        `Name: ${name || 'not provided'}`,
+        `Email: ${email}`,
+        `Page: ${page}`,
+        `Type: ${type}`,
+        ``,
+        message,
+      ].join('\n'),
     });
-    console.log('[feedback] Netlify Forms status:', netlifyRes.status);
+    console.log('[feedback] Email sent via Resend');
   } catch (err) {
-    console.error('[feedback] Netlify Forms POST failed:', err);
+    console.error('[feedback] Resend failed:', err);
   }
 
   return buildRedirect(req);
